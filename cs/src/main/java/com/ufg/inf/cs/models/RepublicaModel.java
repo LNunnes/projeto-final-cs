@@ -1,5 +1,6 @@
 package com.ufg.inf.cs.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -30,7 +31,7 @@ public class RepublicaModel {
     @Column(nullable = false)
     private Double valorMensal;
 
-    @OneToOne(targetEntity = EnderecoModel.class)
+    @OneToOne(targetEntity = EnderecoModel.class, cascade = CascadeType.ALL)
     @JoinColumn(
             name = "ENDERECO_ID", 
             nullable = false, 
