@@ -12,19 +12,19 @@ public class AcomodacaoService {
     @Autowired
     private AcomodacaoRepository acomodacaoRepository;
 
-    public AcomodacaoModel save(AcomodacaoModel acomodacao){
+    public AcomodacaoModel salvarAcomodacao(AcomodacaoModel acomodacao){
        return acomodacaoRepository.save(acomodacao);
     }
 
-    public void delete(Long id){
+    public void deletarAcomodacao(Long id){
         acomodacaoRepository.deleteById(id);
     }
 
-    public AcomodacaoModel getAcomodacaoById(Long id){
+    public AcomodacaoModel buscarAcomodacaoPorId(Long id){
         return acomodacaoRepository.findById(id).orElse(null);
     }
 
-    public List<AcomodacaoModel> getListAcomodacoes(){
+    public List<AcomodacaoModel> buscarListaAcomodacoes(){
         return acomodacaoRepository.findAll();
     }
 }
