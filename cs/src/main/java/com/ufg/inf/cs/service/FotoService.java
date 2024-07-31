@@ -31,6 +31,6 @@ public class FotoService {
     }
 
     public List<FotoModel> listarFotosPorRepublicaId(Long republicaId) {
-        return fotoRepository.findAll();
+        return fotoRepository.findByRepublicaId(republicaId);
     }
 }
