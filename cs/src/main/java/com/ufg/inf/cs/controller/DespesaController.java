@@ -46,7 +46,7 @@ public class DespesaController {
     }
 
     @GetMapping("/despesas/republica/{id}")
-    public ResponseEntity<List<DespesaModel>> getDespesasPorRepublica(Long id) {
+    public ResponseEntity<List<DespesaModel>> getDespesasPorRepublica(@PathVariable Long id) {
         List<DespesaModel> despesas = despesaService.buscarDespesasPorRepublica(id);
 
         return ResponseEntity.ok(despesas);
