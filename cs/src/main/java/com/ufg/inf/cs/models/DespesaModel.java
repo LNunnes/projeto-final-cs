@@ -39,6 +39,7 @@ public class DespesaModel {
             name = "SOLICITACAO_ID", 
             nullable = false, 
             foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "FK_DESPESAS_SOLICITACAO_ID")
+            
     )
     private SolicitacaoModel solicitacao;
 
