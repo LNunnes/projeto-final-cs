@@ -1,5 +1,6 @@
 package com.ufg.inf.cs.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -26,6 +28,9 @@ public class SolicitacaoModel {
 
     @Column(nullable = false)
     private String local;
+
+    @OneToOne(mappedBy = "solicitacao", cascade = CascadeType.ALL, orphanRemoval = true)
+    private DespesaModel despesa;
 
     @ManyToOne(targetEntity = RepublicaModel.class)
     @JoinColumn(
@@ -65,6 +70,14 @@ public class SolicitacaoModel {
 
     public void setRepublica(RepublicaModel republica) {
         this.republica = republica;
+    }
+
+    public DespesaModel getDespesa() {
+        return despesa;
+    }
+
+    public void setDespesa(DespesaModel despesa) {
+        this.despesa = despesa;
     }
 
     @Override
