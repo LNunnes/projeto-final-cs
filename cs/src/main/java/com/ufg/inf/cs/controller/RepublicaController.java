@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +16,7 @@ import com.ufg.inf.cs.models.RepublicaModel;
 import com.ufg.inf.cs.repository.RepublicaRepository;
 
 @RestController
-@RequestMapping("/republica")
+@RequestMapping("/republicas")
 public class RepublicaController {
     
     @Autowired
@@ -23,6 +24,13 @@ public class RepublicaController {
 
     @PostMapping  
 	public ResponseEntity<RepublicaModel> salvarRepublica(@RequestBody RepublicaModel republica) {
+		RepublicaModel republicaModel = republicaRepository.save(republica);	
+	
+		return new ResponseEntity<RepublicaModel>(republicaModel, HttpStatus.OK);
+	}
+
+	@PutMapping  
+	public ResponseEntity<RepublicaModel> atualizarRepublica(@RequestBody RepublicaModel republica) {
 		RepublicaModel republicaModel = republicaRepository.save(republica);	
 	
 		return new ResponseEntity<RepublicaModel>(republicaModel, HttpStatus.OK);

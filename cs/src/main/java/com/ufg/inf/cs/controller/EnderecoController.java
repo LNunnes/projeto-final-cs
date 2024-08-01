@@ -18,7 +18,7 @@ import com.ufg.inf.cs.models.EnderecoModel;
 import com.ufg.inf.cs.repository.EnderecoRepository;
 
 @RestController
-@RequestMapping("/endereco")
+@RequestMapping("/enderecos")
 public class EnderecoController {
 
 	@Autowired
