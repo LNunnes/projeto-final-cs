@@ -24,7 +24,6 @@ public class EspacoComunitarioModel {
     @Column(nullable = false)
     private String nome;
 
-    
     @ManyToOne(targetEntity = RepublicaModel.class)
     @JoinColumn(
             name = "REPUBLICA_ID", 

@@ -2,6 +2,7 @@ package com.ufg.inf.cs.models;
 
 import java.sql.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -36,13 +37,21 @@ public class AgendamentoModel {
     @Column(nullable = false)
     private char situacao = 'A';
 
-    @ManyToOne(targetEntity = EspacoComunitarioModel.class)
+    @ManyToOne(targetEntity = EspacoComunitarioModel.class, cascade = CascadeType.ALL)
     @JoinColumn(
             name = "ESPACO_COMUNITARIO_ID", 
             nullable = false, 
             foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "FK_AGENDAMENTOS_ESPACO_COMUNITARIO_ID")
     )
     private EspacoComunitarioModel espacoComunitario;
+
+    @ManyToOne(targetEntity = UsuarioModel.class, cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "USUARIO_ID", 
+            nullable = false, 
+            foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "FK_AGENDAMENTOS_USUARIO_ID")
+    )
+    private UsuarioModel usuario;
 
     public Long getId() {
         return id;
@@ -82,6 +91,14 @@ public class AgendamentoModel {
 
     public void setEspacoComunitario(EspacoComunitarioModel espacoComunitario) {
         this.espacoComunitario = espacoComunitario;
+    }
+
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
     }
 
     @Override

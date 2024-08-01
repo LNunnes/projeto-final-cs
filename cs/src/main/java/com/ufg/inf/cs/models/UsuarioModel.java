@@ -1,25 +1,20 @@
 package com.ufg.inf.cs.models;
 
 import java.sql.Date;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "USUARIOS")
@@ -72,24 +67,6 @@ public class UsuarioModel {
             foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "FK_USUARIOS_ACOMODACAO_ID")
     )
     private AcomodacaoModel acomodacao;
-
-    @OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-		name = "USUARIOS_TAREFAS", 
-		uniqueConstraints = @UniqueConstraint (columnNames = {"USUARIO_ID", "TAREFA_ID"}, name = "UNI_USUARIO_TAREFA" ), 
-		joinColumns = @JoinColumn(name = "USUARIO_ID", referencedColumnName = "ID", table = "USUARIOS", foreignKey = @ForeignKey(name = "FK_USUARIOS_TAREFAS_USUARIO_ID", value = ConstraintMode.CONSTRAINT)),
-		inverseJoinColumns = @JoinColumn(name = "TAREFA_ID", referencedColumnName = "ID", table = "TAREFAS", foreignKey = @ForeignKey(name = "FK_USUARIOS_TAREFAS_TAREFA_ID", value = ConstraintMode.CONSTRAINT))
-	)
-	private List<TarefaModel> tarefas;
-
-    @OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-		name = "USUARIOS_AGENDAMENTOS", 
-		uniqueConstraints = @UniqueConstraint (columnNames = {"USUARIO_ID", "AGENDAMENTO_ID"}, name = "UNI_USUARIO_AGENDAMENTO" ), 
-		joinColumns = @JoinColumn(name = "USUARIO_ID", referencedColumnName = "ID", table = "USUARIOS", foreignKey = @ForeignKey(name = "FK_USUARIOS_TAREFAS_USUARIO_ID", value = ConstraintMode.CONSTRAINT)),
-		inverseJoinColumns = @JoinColumn(name = "AGENDAMENTO_ID", referencedColumnName = "ID", table = "AGENDAMENTOS", foreignKey = @ForeignKey(name = "FK_USUARIOS_TAREFAS_TAREFA_ID", value = ConstraintMode.CONSTRAINT))
-	)
-	private List<AgendamentoModel> agendamentos;
 
     public Long getId() {
         return id;
@@ -193,22 +170,6 @@ public class UsuarioModel {
 
     public void setAcomodacao(AcomodacaoModel acomodacao) {
         this.acomodacao = acomodacao;
-    }
-
-    public List<TarefaModel> getTarefas() {
-        return tarefas;
-    }
-
-    public void setTarefas(List<TarefaModel> tarefas) {
-        this.tarefas = tarefas;
-    }
-
-    public List<AgendamentoModel> getAgendamentos() {
-        return agendamentos;
-    }
-
-    public void setAgendamentos(List<AgendamentoModel> agendamentos) {
-        this.agendamentos = agendamentos;
     }
 
     @Override

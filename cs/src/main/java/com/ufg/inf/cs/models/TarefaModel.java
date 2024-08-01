@@ -2,6 +2,7 @@ package com.ufg.inf.cs.models;
 
 import java.sql.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -45,6 +46,14 @@ public class TarefaModel {
             foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "FK_TAREFAS_REPUBLICA_ID")
     )
     private RepublicaModel republica;
+
+    @ManyToOne(targetEntity = UsuarioModel.class, cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "USUARIO_ID", 
+            nullable = false, 
+            foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "FK_TAREFAS_USUARIO_ID")
+    )
+    private UsuarioModel usuario;
 
     public Long getId() {
         return id;
@@ -92,6 +101,14 @@ public class TarefaModel {
 
     public void setRepublica(RepublicaModel republica) {
         this.republica = republica;
+    }
+
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
     }
 
     @Override

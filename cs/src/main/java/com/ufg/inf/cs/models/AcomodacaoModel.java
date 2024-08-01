@@ -22,6 +22,9 @@ public class AcomodacaoModel {
     private Long id;
 
     @Column(nullable = false)
+    private String descricao;
+
+    @Column(nullable = false)
     private int capacidade;
 
     @Column(nullable = false)
@@ -46,6 +49,14 @@ public class AcomodacaoModel {
         this.id = id;
     }
 
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+    
     public int getCapacidade() {
         return capacidade;
     }

@@ -1,7 +1,6 @@
 package com.ufg.inf.cs.repository;
 
 import com.ufg.inf.cs.models.AgendamentoModel;
-import com.ufg.inf.cs.models.EspacoComunitarioModel;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

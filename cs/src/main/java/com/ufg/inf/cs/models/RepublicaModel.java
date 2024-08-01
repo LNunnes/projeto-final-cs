@@ -21,6 +21,9 @@ public class RepublicaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_REPUBLICAS")
     private Long id;
+
+    @Column(nullable = false)
+    private String descricao;
     
     @Column(nullable = false)
     private int numeroQuartos;
@@ -45,6 +48,14 @@ public class RepublicaModel {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
     }
 
     public int getNumeroQuartos() {
