@@ -18,7 +18,7 @@ import com.ufg.inf.cs.models.TarefaModel;
 import com.ufg.inf.cs.repository.TarefaRepository;
 
 @RestController
-@RequestMapping("/tarefa")
+@RequestMapping("/tarefas")
 public class TarefaController {
 
 	@Autowired
@@ -45,7 +45,7 @@ public class TarefaController {
 		return new ResponseEntity<TarefaModel>(tarefa, HttpStatus.OK);
 	}
 
-    @GetMapping(value = "s")
+    @GetMapping
 	public ResponseEntity<List<TarefaModel>> buscarTodasTarefas() {
 		List<TarefaModel> tarefas = tarefaRepository.findAll();
 	

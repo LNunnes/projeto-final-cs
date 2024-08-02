@@ -14,9 +14,9 @@ import org.springframework.stereotype.Repository;
 @Transactional
 public interface UsuarioRepository extends JpaRepository<UsuarioModel, Long> {
 
-    @Query(value = "SELECT * FROM USUARIOS WHERE TIPO_CONTA = 'R' AND republicaId = :republicaId", nativeQuery = true)
+    @Query(value = "SELECT * FROM USUARIOS WHERE TIPO_CONTA = 'R' AND REPUBLICA_ID = :republicaId", nativeQuery = true)
     List<UsuarioModel> listarResidentes(@Param("republicaId") Long republicaId);
 
-    @Query(value = "SELECT * FROM USUARIOS WHERE TIPO_CONTA = 'G' AND republicaId = :republicaId", nativeQuery = true)
+    @Query(value = "SELECT * FROM USUARIOS WHERE TIPO_CONTA = 'G' AND REPUBLICA_ID = :republicaId", nativeQuery = true)
     List<UsuarioModel> listarGerentes(@Param("republicaId") Long republicaId);
 }

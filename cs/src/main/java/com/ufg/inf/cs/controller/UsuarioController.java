@@ -21,10 +21,10 @@ import com.ufg.inf.cs.repository.UsuarioRepository;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-  @Autowired
-  private UsuarioRepository usuarioRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
-  @PostMapping  
+	@PostMapping  
 	public ResponseEntity<UsuarioModel> criarUsuario(@RequestBody UsuarioModel usuario) {
 		UsuarioModel usuarioModel = usuarioRepository.save(usuario);
 	
@@ -48,13 +48,15 @@ public class UsuarioController {
 	@GetMapping("/residentes/{republicaId}")
     public ResponseEntity<List<UsuarioModel>> listarResidentesPorRepublicaId(@PathVariable Long republicaId) {
         List<UsuarioModel> residentes = usuarioRepository.listarResidentes(republicaId);
-        return ResponseEntity.ok(residentes);
+        return new ResponseEntity<List<UsuarioModel>>(residentes, HttpStatus.OK);
     }
 
 	@GetMapping("/gerentes/{republicaId}")
     public ResponseEntity<List<UsuarioModel>> listarGerentesPorRepublicaId(@PathVariable Long republicaId) {
         List<UsuarioModel> gerentes = usuarioRepository.listarGerentes(republicaId);
-        return ResponseEntity.ok(gerentes);
+
+		return new ResponseEntity<List<UsuarioModel>>(gerentes, HttpStatus.OK);
+
     }
 
 	@DeleteMapping(value = "/{id}")
