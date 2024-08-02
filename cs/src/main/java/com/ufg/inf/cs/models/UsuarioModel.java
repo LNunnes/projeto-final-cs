@@ -55,7 +55,7 @@ public class UsuarioModel {
     @ManyToOne(targetEntity = RepublicaModel.class)
     @JoinColumn(
             name = "REPUBLICA_ID", 
-            nullable = false, 
+            nullable = true, 
             foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "FK_USUARIOS_REPUBLICA_ID")
     )
     private RepublicaModel republica;
