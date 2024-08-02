@@ -2,6 +2,8 @@ package com.ufg.inf.cs.models;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -34,6 +36,7 @@ public class DespesaModel {
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
 
+    @JsonIgnore
     @OneToOne(targetEntity = SolicitacaoModel.class)
 	@JoinColumn(
             name = "SOLICITACAO_ID", 

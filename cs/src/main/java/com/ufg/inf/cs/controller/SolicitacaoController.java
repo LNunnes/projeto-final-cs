@@ -19,12 +19,20 @@ public class SolicitacaoController {
 
     @PostMapping
     public ResponseEntity<SolicitacaoModel> criarSolicitacao(@RequestBody SolicitacaoModel solicitacao) {
+        if (solicitacao.getDespesa() != null) {
+            solicitacao.getDespesa().setSolicitacao(solicitacao);
+        }
+
         SolicitacaoModel solicitacaoModel = solicitacaoService.salvarSolicitacao(solicitacao);
         return new ResponseEntity<>(solicitacaoModel, HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity<SolicitacaoModel> atualizarSolicitacao(@RequestBody SolicitacaoModel solicitacao) {
+        if (solicitacao.getDespesa() != null) {
+            solicitacao.getDespesa().setSolicitacao(solicitacao);
+        }
+        
         SolicitacaoModel solicitacaoModel = solicitacaoService.salvarSolicitacao(solicitacao);
         return new ResponseEntity<>(solicitacaoModel, HttpStatus.OK);
     }

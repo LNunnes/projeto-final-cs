@@ -1,5 +1,7 @@
 package com.ufg.inf.cs.models;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
@@ -9,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -41,6 +44,9 @@ public class RepublicaModel {
             foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "FK_REPUBLICAS_ENDERECO_ID")
     )
     private EnderecoModel endereco;
+
+     @OneToMany(mappedBy = "republica", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FotoModel> fotos;
 
     public Long getId() {
         return id;
@@ -88,6 +94,14 @@ public class RepublicaModel {
 
     public void setEndereco(EnderecoModel endereco) {
         this.endereco = endereco;
+    }
+
+    public void setFotos(List<FotoModel> fotos) {
+        this.fotos = fotos;
+    }
+
+    public List<FotoModel> getFotos() {
+        return fotos;
     }
 
     @Override
