@@ -2,7 +2,6 @@ package com.ufg.inf.cs.models;
 
 import java.sql.Date;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -37,7 +36,7 @@ public class AgendamentoModel {
     @Column(nullable = false)
     private char situacao = 'A';
 
-    @ManyToOne(targetEntity = EspacoComunitarioModel.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = EspacoComunitarioModel.class)
     @JoinColumn(
             name = "ESPACO_COMUNITARIO_ID", 
             nullable = false, 
@@ -45,7 +44,7 @@ public class AgendamentoModel {
     )
     private EspacoComunitarioModel espacoComunitario;
 
-    @ManyToOne(targetEntity = UsuarioModel.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = UsuarioModel.class)
     @JoinColumn(
             name = "USUARIO_ID", 
             nullable = false, 

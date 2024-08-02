@@ -2,7 +2,6 @@ package com.ufg.inf.cs.models;
 
 import java.sql.Date;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -47,7 +46,7 @@ public class TarefaModel {
     )
     private RepublicaModel republica;
 
-    @ManyToOne(targetEntity = UsuarioModel.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = UsuarioModel.class)
     @JoinColumn(
             name = "USUARIO_ID", 
             nullable = false, 

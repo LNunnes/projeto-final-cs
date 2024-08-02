@@ -1,5 +1,7 @@
 package com.ufg.inf.cs.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ufg.inf.cs.models.FotoModel;
 import com.ufg.inf.cs.models.RepublicaModel;
 import com.ufg.inf.cs.repository.RepublicaRepository;
 
 @RestController
-@RequestMapping("/republicas")
+@RequestMapping("/republica")
 public class RepublicaController {
     
     @Autowired
@@ -24,6 +27,13 @@ public class RepublicaController {
 
     @PostMapping  
 	public ResponseEntity<RepublicaModel> salvarRepublica(@RequestBody RepublicaModel republica) {
+		List<FotoModel> fotos = republica.getFotos();
+        if (fotos != null) {
+            for (FotoModel foto : fotos) {
+                foto.setRepublica(republica);
+            }
+        }
+
 		RepublicaModel republicaModel = republicaRepository.save(republica);	
 	
 		return new ResponseEntity<RepublicaModel>(republicaModel, HttpStatus.OK);
@@ -31,6 +41,13 @@ public class RepublicaController {
 
 	@PutMapping  
 	public ResponseEntity<RepublicaModel> atualizarRepublica(@RequestBody RepublicaModel republica) {
+		List<FotoModel> fotos = republica.getFotos();
+        if (fotos != null) {
+            for (FotoModel foto : fotos) {
+                foto.setRepublica(republica);
+            }
+        }
+		
 		RepublicaModel republicaModel = republicaRepository.save(republica);	
 	
 		return new ResponseEntity<RepublicaModel>(republicaModel, HttpStatus.OK);
