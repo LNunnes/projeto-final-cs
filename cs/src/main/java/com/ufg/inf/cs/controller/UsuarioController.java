@@ -1,19 +1,22 @@
 package com.ufg.inf.cs.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufg.inf.cs.models.UsuarioModel;
 import com.ufg.inf.cs.repository.UsuarioRepository;
 
-@Controller
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -44,13 +47,13 @@ public class UsuarioController {
 
 	@GetMapping("/residentes/{republicaId}")
     public ResponseEntity<List<UsuarioModel>> listarResidentesPorRepublicaId(@PathVariable Long republicaId) {
-        List<UsuarioModel> residentes = UsuarioRepository.listarResidentes(republicaId);
+        List<UsuarioModel> residentes = usuarioRepository.listarResidentes(republicaId);
         return ResponseEntity.ok(residentes);
     }
 
 	@GetMapping("/gerentes/{republicaId}")
     public ResponseEntity<List<UsuarioModel>> listarGerentesPorRepublicaId(@PathVariable Long republicaId) {
-        List<UsuarioModel> gerentes = UsuarioRepository.listarGerentes(republicaId);
+        List<UsuarioModel> gerentes = usuarioRepository.listarGerentes(republicaId);
         return ResponseEntity.ok(gerentes);
     }
 
