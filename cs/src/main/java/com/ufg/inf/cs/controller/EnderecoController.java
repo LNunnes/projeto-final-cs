@@ -32,8 +32,12 @@ public class EnderecoController {
 	}
 
     @GetMapping(value = "/{id}")  
-	public ResponseEntity<EnderecoModel> buscarEnderecoPorId(@PathVariable Long id) {
+	public ResponseEntity<EnderecoModel> buscarEnderecoPorId(@PathVariable Long id) throws Exception {
 		EnderecoModel enderecos = enderecoRepository.findById(id).get();
+
+		if (enderecos == null) {
+			throw new Exception("Não existe endereço cadastrado com esse código. Código: " + id);
+		}
 	
 		return new ResponseEntity<EnderecoModel>(enderecos, HttpStatus.OK);
 	}

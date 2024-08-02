@@ -30,8 +30,12 @@ public class AcomodacaoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AcomodacaoModel> getAcomodacao(@PathVariable Long id) {
+    public ResponseEntity<AcomodacaoModel> getAcomodacao(@PathVariable Long id) throws Exception {
         AcomodacaoModel acomodacao = acomodacaoService.buscarAcomodacaoPorId(id);
+
+        if (acomodacao == null) {
+			throw new Exception("Não existe acomodação cadastrada com esse código. Código: " + id);
+		}
 
         return ResponseEntity.ok(acomodacao);
     }
@@ -44,8 +48,12 @@ public class AcomodacaoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AcomodacaoModel>> getTodasAcomodacoes(){
+    public ResponseEntity<List<AcomodacaoModel>> getTodasAcomodacoes() throws Exception{
         List<AcomodacaoModel> acomodacoes = acomodacaoService.buscarListaAcomodacoes();
+
+        if (acomodacoes.size() == 0) {
+			throw new Exception("Não existe acomodações cadastradas.");
+		}
 
         return ResponseEntity.ok(acomodacoes);
     }

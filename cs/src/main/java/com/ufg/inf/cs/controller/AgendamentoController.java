@@ -37,8 +37,12 @@ public class AgendamentoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AgendamentoModel> getAgendamento(@PathVariable Long id) {
+    public ResponseEntity<AgendamentoModel> getAgendamento(@PathVariable Long id) throws Exception {
         AgendamentoModel agendamento = agendamentoService.buscarAgendamentoPorId(id);
+
+        if (agendamento == null) {
+			throw new Exception("Não existe agendamento cadastrado com esse código. Código: " + id);
+		}
 
         return ResponseEntity.ok(agendamento);
     }

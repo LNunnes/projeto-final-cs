@@ -39,9 +39,13 @@ public class UsuarioController {
 	}
 
   	@GetMapping(value = "/{id}")  
-	public ResponseEntity<UsuarioModel> buscarUsuarioPorId(@PathVariable Long id) {
+	public ResponseEntity<UsuarioModel> buscarUsuarioPorId(@PathVariable Long id) throws Exception {
 		UsuarioModel usuario = usuarioRepository.findById(id).get();
 	
+		if (usuario == null) {
+			throw new Exception("Não existe usuário cadastrado com esse código. Código: " + id);
+		}
+
 		return new ResponseEntity<UsuarioModel>(usuario, HttpStatus.OK);
 	}
 

@@ -54,8 +54,12 @@ public class RepublicaController {
 	}
 
     @GetMapping(value = "/{id}")  
-	public ResponseEntity<RepublicaModel> buscarRepublicaPorId(@PathVariable Long id) {
+	public ResponseEntity<RepublicaModel> buscarRepublicaPorId(@PathVariable Long id) throws Exception {
 		RepublicaModel republica = republicaRepository.findById(id).get();
+
+		if (republica == null) {
+			throw new Exception("Não existe república cadastrada com esse código. Código: " + id);
+		}
 	
 		return new ResponseEntity<RepublicaModel>(republica, HttpStatus.OK);
 	}

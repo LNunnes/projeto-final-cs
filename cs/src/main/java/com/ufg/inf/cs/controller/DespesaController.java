@@ -38,8 +38,12 @@ public class DespesaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DespesaModel> getDespesa(@PathVariable Long id) {
+    public ResponseEntity<DespesaModel> getDespesa(@PathVariable Long id) throws Exception {
         DespesaModel despesa = despesaService.buscarDespesaPorId(id);
+
+        if (despesa == null) {
+			throw new Exception("Não existe despesa cadastrada com esse código. Código: " + id);
+		}
 
         return ResponseEntity.ok(despesa);
     }

@@ -44,8 +44,13 @@ public class SolicitacaoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SolicitacaoModel> buscarSolicitacaoPorId(@PathVariable Long id) {
+    public ResponseEntity<SolicitacaoModel> buscarSolicitacaoPorId(@PathVariable Long id) throws Exception {
         SolicitacaoModel solicitacao = solicitacaoService.buscarSolicitacaoPorId(id);
+
+        if (solicitacao == null) {
+			throw new Exception("Não existe solicitação cadastrada com esse código. Código: " + id);
+		}
+
         return ResponseEntity.ok(solicitacao);
     }
 

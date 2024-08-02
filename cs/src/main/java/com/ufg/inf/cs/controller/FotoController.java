@@ -24,8 +24,13 @@ public class FotoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FotoModel> buscarFotoPorId(@PathVariable Long id) {
+    public ResponseEntity<FotoModel> buscarFotoPorId(@PathVariable Long id) throws Exception {
         FotoModel foto = fotoService.buscarFotoPorId(id);
+
+        if (foto == null) {
+			throw new Exception("Não existe foto cadastrada com esse código. Código: " + id);
+		}
+
         return ResponseEntity.ok(foto);
     }
 

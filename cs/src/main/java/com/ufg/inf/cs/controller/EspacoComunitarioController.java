@@ -25,30 +25,34 @@ public class EspacoComunitarioController {
     }
 
     @GetMapping("/{id}")
-     public ResponseEntity<EspacoComunitarioModel> buscarEspacoComunitarioPorId(@PathVariable Long id) {
-         EspacoComunitarioModel espacoComunitario = espacoComunitarioService.buscarEspacoComunitarioPorId(id);
+    public ResponseEntity<EspacoComunitarioModel> buscarEspacoComunitarioPorId(@PathVariable Long id) throws Exception {
+        EspacoComunitarioModel espacoComunitario = espacoComunitarioService.buscarEspacoComunitarioPorId(id);
 
-         return ResponseEntity.ok(espacoComunitario);
-     }
+        if (espacoComunitario == null) {
+			throw new Exception("Não existe espaço comunitário cadastrado com esse código. Código: " + id);
+		}
 
-     @GetMapping
-     public ResponseEntity<List<EspacoComunitarioModel>> listaEspacosComunitarios() {
-         List<EspacoComunitarioModel> espacosComunitarios = espacoComunitarioService.listaEspacosComunitarios();
+        return ResponseEntity.ok(espacoComunitario);
+    }
 
-         return ResponseEntity.ok(espacosComunitarios);
-     }
+    @GetMapping
+    public ResponseEntity<List<EspacoComunitarioModel>> listaEspacosComunitarios() {
+        List<EspacoComunitarioModel> espacosComunitarios = espacoComunitarioService.listaEspacosComunitarios();
 
-     @PutMapping
+        return ResponseEntity.ok(espacosComunitarios);
+    }
+
+    @PutMapping
     public ResponseEntity<EspacoComunitarioModel> atualizarEspacoComunitario(@RequestBody EspacoComunitarioModel espacoComunitario) {
         EspacoComunitarioModel espacoComunitarioModel = espacoComunitarioService.salvarEspacoComunitario(espacoComunitario);
         
         return new ResponseEntity<>(espacoComunitarioModel, HttpStatus.OK);
     }
 
-     @DeleteMapping("/{id}")
-     public ResponseEntity<String> deletarEspacoComunitarioPorId(@PathVariable Long id) {
-         espacoComunitarioService.deletarEspacoComunitarioPorId(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletarEspacoComunitarioPorId(@PathVariable Long id) {
+        espacoComunitarioService.deletarEspacoComunitarioPorId(id);
 
-         return ResponseEntity.ok("Espaço Comunitário deletado.");
-     }
+        return ResponseEntity.ok("Espaço Comunitário deletado.");
+    }
 }

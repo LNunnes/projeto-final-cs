@@ -39,9 +39,13 @@ public class TarefaController {
 	}
 
   	@GetMapping(value = "/{id}")  
-	public ResponseEntity<TarefaModel> buscarTarefaPorId(@PathVariable Long id) {
+	public ResponseEntity<TarefaModel> buscarTarefaPorId(@PathVariable Long id) throws Exception {
 		TarefaModel tarefa = tarefaRepository.findById(id).get();
 	
+		if (tarefa == null) {
+			throw new Exception("Não existe tarefa cadastrada com esse código. Código: " + id);
+		}
+
 		return new ResponseEntity<TarefaModel>(tarefa, HttpStatus.OK);
 	}
 
